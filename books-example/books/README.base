@@ -1,0 +1,32 @@
+formulas:
+  author.name: |
+    author.map(value.asFile().properties.name).join(", ")
+  authorNameLink: author.map(link(value,value.asFile().properties.name))
+properties:
+  formula.author.name:
+    displayName: authors
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder == "books-example/books"
+    order:
+      - title
+      - price
+      - formula.author.name
+      - formula.authorNameLink
+    sort:
+      - property: price
+        direction: DESC
+      - property: formula.authorNameLink
+        direction: ASC
+      - property: formula.author.name
+        direction: DESC
+      - property: title
+        direction: ASC
+      - property: author
+        direction: DESC
+    columnSize:
+      note.title: 188
+      note.price: 110

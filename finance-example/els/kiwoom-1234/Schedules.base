@@ -1,0 +1,31 @@
+formulas:
+  Untitled: number((link(file.folder.split("/").slice(0,-1).join("/") + "/README.md").asFile().properties.initialPrice).split(",")[0]) * criteria / 100
+  Untitled 2: number((link(file.folder.split("/").slice(0,-1).join("/") + "/README.md").asFile().properties.initialPrice).split(",")[1]) * criteria / 100
+properties:
+  formula.Untitled:
+    displayName: 테슬라
+  formula.Untitled 2:
+    displayName: 팔란티어 테크
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.inFolder("finance-example/els/kiwoom-1234/plans")
+    order:
+      - file.name
+      - evaluationDate
+      - payoutDate
+      - criteria
+      - formula.Untitled
+      - formula.Untitled 2
+      - completed
+    sort:
+      - property: criteria
+        direction: ASC
+      - property: file.name
+        direction: ASC
+      - property: formula.Untitled 2
+        direction: DESC
+  - type: table
+    name: View
