@@ -1,27 +1,23 @@
 formulas:
-  p: link(file.folder.split("/").slice(0,-1).join("/") + "/README.md").asFile().properties
-  a1: number((formula.p.initialPrice).split(",")[0]) * criteria / 100
-  a2: number((formula.p.initialPrice).split(",")[1]) * criteria / 100
+  folder: file.folder.split("/").slice(0,-1).join("/")
+  p: link(formula.folder + "/README.md").asFile().properties
+  테슬라: number((formula.p.initialPrice).split(",")[0]) * criteria / 100
+  팔란티어 테크: number((formula.p.initialPrice).split(",")[1]) * criteria / 100
   interestRate: number(file.name) / (formula.p.numEvaluations/formula.p.maturityDurations) * formula.p.interestRate/ 100
   interestAmount: formula.interestRate * formula.p.amount
   name: if(number(file.name) != formula.p.numEvaluations,  file.name + "차 " + "조기상환 ", "만기 상황")
-properties:
-  formula.a1:
-    displayName: 테슬라
-  formula.a2:
-    displayName: 팔란티어 테크
 views:
   - type: table
     name: Table
     filters:
       and:
-        - file.inFolder("finance-example/els/kiwoom-1234/plans")
+        - file.inFolder(formula.folder + "/plans")
     order:
       - formula.name
       - evaluationDate
       - criteria
-      - formula.a1
-      - formula.a2
+      - formula.테슬라
+      - formula.팔란티어 테크
       - formula.interestRate
       - formula.interestAmount
       - completed
@@ -30,13 +26,9 @@ views:
         direction: ASC
       - property: formula.Untitled
         direction: ASC
-      - property: formula.a1
+      - property: formula.테슬라
         direction: DESC
       - property: criteria
         direction: DESC
-      - property: formula.a2
+      - property: formula.팔란티어 테크
         direction: DESC
-  - type: table
-    name: View
-  - type: table
-    name: View 2
