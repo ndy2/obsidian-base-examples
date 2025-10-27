@@ -1,7 +1,7 @@
 formulas:
   p: link(file.folder.split("/").slice(0,-1).join("/") + "/README.md").asFile().properties
-  a1: number((formula.p.initialPrice).split(",")[0]) * criteria / 100
-  a2: number((formula.p.initialPrice).split(",")[1]) * criteria / 100
+  a1: number((formula.p.initialPrice)[0]) * criteria / 100
+  a2: number((formula.p.initialPrice)[1]) * criteria / 100
   interestRate: number(file.name) / (formula.p.numEvaluations/formula.p.maturityDurations) * formula.p.interestRate/ 100
   interestAmount: formula.interestRate * formula.p.amount
   name: if(number(file.name) != formula.p.numEvaluations,  file.name + "차 " + "조기상환 ", "만기 상황")

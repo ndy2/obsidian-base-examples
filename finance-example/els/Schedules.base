@@ -23,6 +23,8 @@ views:
       - completed
     sort:
       - property: evaluationDate
+        direction: DESC
+      - property: formula.fullName
         direction: ASC
       - property: formula.p
         direction: ASC

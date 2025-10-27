@@ -11,7 +11,7 @@ views:
     name: Table
     filters:
       and:
-        - file.inFolder(formula.folder + "/plans")
+        - file.inFolder("finance-example/els/kiwoom-2345/plans")
     order:
       - formula.name
       - evaluationDate
